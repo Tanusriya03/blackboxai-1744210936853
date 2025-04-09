@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Plan Your Trip</h1>
+    
+    <form method="POST" action="{{ url_for('main.search') }}" class="space-y-6">
+        <div>
+            <label for="destination" class="block text-sm font-medium text-gray-700">Destination</label>
+            <select id="destination" name="destination" required
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                <option value="">Select a destination</option>
+                {% for destination in destinations %}
+                    <option value="{{ destination }}">{{ destination }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div>
+                <label for="days" class="block text-sm font-medium text-gray-700">Number of Days</label>
+                <input type="number" id="days" name="days" min="1" max="30" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            
+            <div>
+                <label for="people" class="block text-sm font-medium text-gray-700">Number of People</label>
+                <input type="number" id="people" name="people" min="1" max="20" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+        </div>
+        
+        <div>
+            <label for="budget" class="block text-sm font-medium text-gray-700">Total Budget (₹)</label>
+            <input type="number" id="budget" name="budget" min="1000" step="500" required
+                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        
+        <div class="pt-4">
+            <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <i class="fas fa-search mr-2"></i> Find Recommendations
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
